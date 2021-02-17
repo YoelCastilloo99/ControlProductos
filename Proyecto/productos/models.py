@@ -13,11 +13,11 @@ class Producto(models.Model):
 
 
 class Venta(models.Model):
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name='venta_producto')
     cantidad = models.IntegerField(null=False)
     descripcion = models.CharField(max_length=255, null=True)
     fecha = models.DateTimeField(default=timezone.now)
-    total = models.IntegerField(null=False)
+    total = models.FloatField()
     comprador = models.CharField(max_length=255, null=True)
 
     def __str__(self):
