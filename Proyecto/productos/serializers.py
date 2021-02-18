@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = ('empleado', 'nombre', 'descripcion', 'categoria', 'precio')
+        fields = ('id', 'empleado', 'nombre', 'descripcion', 'categoria', 'precio')
 
 class VentaSerializer(serializers.ModelSerializer):
     #total = serializers.IntegerField()
