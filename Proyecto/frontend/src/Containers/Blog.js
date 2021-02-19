@@ -1,5 +1,5 @@
 import React from "react";
-import {Layout, Menu} from 'antd';
+import { Layout, Menu } from 'antd';
 import "antd/dist/antd.css";
 import ListPosts from "./ListPosts";
 import CreateNewPost from "./CreateNewPost";
@@ -9,16 +9,18 @@ class Blog extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected:1
+            producto: null,
+            selected: 1,
+            estadoeditar:false
         }
     }
+
     handleClick = e => {
-        this.setState({selected:e})
+        this.setState({ selected: e })
     }
 
-    onEditproducto(producto){
-        this.setState({selected:2})
-        alert(producto.nombre)
+    onEditproducto = (producto) => {
+        this.setState({ selected: 2, producto: producto, estadoeditar:true })
     }
 
     render() {
@@ -28,11 +30,11 @@ class Blog extends React.Component {
             <Layout>
                 <Header>
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[this.state.selected.toString()]}>
-                        <Menu.Item key="1" onEditproducto={this.onEditproducto} onClick={() => this.handleClick(1)}> Ver Productos</Menu.Item>
+                        <Menu.Item key="1" onClick={() => this.handleClick(1)}> Ver Productos</Menu.Item>
                         <Menu.Item key="2" onClick={() => this.handleClick(2)}> Crear Productos</Menu.Item>
                     </Menu></Header>
                 <Content>
-                    {this.state.selected==1?<ListPosts />: <CreateNewPost/>
+                    {this.state.selected == 1 ? <ListPosts onEditproducto={this.onEditproducto} /> : <CreateNewPost producto={this.state.producto} estadoeditar={this.state.estadoeditar}/>
                     }
                 </Content>
             </Layout>

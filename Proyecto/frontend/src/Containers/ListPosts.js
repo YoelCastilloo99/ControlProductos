@@ -18,7 +18,7 @@ class ListPosts extends React.Component {
 
     render() {
         const productos = this.props.productos
-        console.log(this.props)
+        console.log("listado", this.props)
         return ( 
             <Col span={12} offset={6}>
                 {productos.map(p => (

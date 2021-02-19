@@ -17,6 +17,8 @@ class VentaView(viewsets.ModelViewSet):
 
 
 class UserViewset(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
     @action(methods=["post"], detail=False)
     def login(self, request, *args, **kwargs):
         data = request.data

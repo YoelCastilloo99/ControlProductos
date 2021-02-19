@@ -51,3 +51,19 @@ export const createPost = (data,cb) => {
             );
     }
 }
+
+export const actualizar = (data,id) => {
+    return dispatch => {
+        axios.put("http://127.0.0.1:8000/api/productos/"+id+"/", data)
+            .then(response => {
+                console.log(response)
+                dispatch({type:Types.CREATE_POST, payload:response.data});
+            }
+            )
+            .catch(err => {
+                console.log(err)
+                dispatch({type:Types.POSTS_LOADING, payload:false})
+            }
+            );
+    }
+}
