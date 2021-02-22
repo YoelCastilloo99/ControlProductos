@@ -3,6 +3,8 @@ import { Layout, Menu } from 'antd';
 import "antd/dist/antd.css";
 import ListPosts from "./ListPosts";
 import CreateNewPost from "./CreateNewPost";
+import { connect } from 'react-redux'
+import { onLogout } from "../Redux/Login/actions"
 
 
 class Blog extends React.Component {
@@ -23,6 +25,8 @@ class Blog extends React.Component {
         this.setState({ selected: 2, producto: producto, estadoeditar:true })
     }
 
+    
+
     render() {
         const { Header, Content } = Layout;
 
@@ -32,6 +36,9 @@ class Blog extends React.Component {
                     <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[this.state.selected.toString()]}>
                         <Menu.Item key="1" onClick={() => this.handleClick(1)}> Ver Productos</Menu.Item>
                         <Menu.Item key="2" onClick={() => this.handleClick(2)}> Crear Productos</Menu.Item>
+                        <Menu.Item key="3" onClick={() => window.location.href = "/#/ventas"}> Ventas </Menu.Item>
+                        <Menu.Item key="4" onClick={() => window.location.href = "/#/reportes"}> Ver reportes </Menu.Item>
+                        <Menu.Item key="5" onClick={() => this.props.onLogout()}> Salir</Menu.Item>
                     </Menu></Header>
                 <Content>
                     {this.state.selected == 1 ? <ListPosts onEditproducto={this.onEditproducto} /> : <CreateNewPost producto={this.state.producto} estadoeditar={this.state.estadoeditar}/>
@@ -42,5 +49,8 @@ class Blog extends React.Component {
     }
 }
 
+const mapstateToProps = state => ({
+    ...state.loginReducer, ...state.productoReducer
+})
 
-export default Blog
+export default connect(mapstateToProps, { onLogout  })(Blog)

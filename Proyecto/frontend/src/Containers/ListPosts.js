@@ -34,6 +34,8 @@ class ListPosts extends React.Component {
                                         ]}
                                     >
                                         <p>{p.precio}</p>
+                                        <p>{p.descripcion}</p>
+                                        <p>Categoria: {p.categoria}</p>
                                     </Card>
                                 </Col>
                             </Row>

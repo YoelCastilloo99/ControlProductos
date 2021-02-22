@@ -55,10 +55,11 @@ class Register extends Component {
                         <input type="password" className="form-control" name="password" onChange={this.onChange} value={password} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="repassword" className="form-label">repetir Password</label>
+                        <label htmlFor="repassword" className="form-label">Repetir Password</label>
                         <input type="password" className="form-control" name="repassword" onChange={this.onChange} value={repassword} />
                     </div>
                     <button type="submit" className="btn btn-primary">Ingresar</button>
+                    <a className="btn btn.primary" href="/#/login">Login</a>
                 </form>
             </div>
         )

@@ -42,6 +42,7 @@ class Login extends Component {
                         <input type="password" className="form-control" name="password" id="password" onChange={this.onChange} value={password} />
                     </div>
                     <button type="submit" className="btn btn-primary">Ingresar</button>
+                    <a className="btn btn.primary" href="/#/registro">Registrarse</a>
                 </form>
             </div>
         )

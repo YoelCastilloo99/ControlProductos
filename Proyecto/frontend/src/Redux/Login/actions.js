@@ -36,44 +36,38 @@ export const onLogin = (username, password) => (dispatch) => {
         });
 };
 
-export const onRegister = ({ username, password, email }) => (dispatch) => {
+export const onRegister = (usuario) => (dispatch) => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
         },
     };
-    const body = JSON.stringify({ username, email, password });
-
-    axios.post("http://127.0.0.1:8000/api/user/", body, config)
+    //const body = JSON.stringify({ username, email, password });
+    //console.log(usuario)
+    axios.post("http://127.0.0.1:8000/api/user/", usuario, config)
         .then((res) => {
             dispatch({
                 type: Types.LOGIN_SUCCESS,
                 payload: res.data
             });
-            window.location.href = '/#/login'
+           // window.location.href = '/#/'
+           console.log(res)
         })
         .catch((err) => {
-           // dispatch(returnErrors(err.response.data, err.response.status));
-            dispatch({type: Types.REGISTER_FAIL});
+            // dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({ type: Types.REGISTER_FAIL });
         });
 };
 
 export const onLogout = () => (dispatch, getState) => {
-    axios
-        .post("http://127.0.0.1:8000/api/logout/", null, tokenConfig(getState))
-        .then((res) => {
-            dispatch({ type: 'CLEAR_LEADS' });
-            dispatch({
-                type: Types.AUTH_ERROR,
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    dispatch({
+        type: Types.LOGOUT,
+    });
+    window.location.href = "/#/login"
 };
 
 export const tokenConfig = (getState) => {
-    const token = getState().auth.token;
+    const token = getState().loginReducer.token;
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -85,3 +79,4 @@ export const tokenConfig = (getState) => {
 
     return config;
 };
+

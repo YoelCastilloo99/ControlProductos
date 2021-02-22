@@ -33,3 +33,13 @@ class UserViewset(viewsets.ModelViewSet):
             return Response({"detail": "No existe el Usuario"}, status=status.HTTP_404_NOT_FOUND)
         except KeyError as e:
             return Response({"detail": "{} is a required field".format(str(e))}, status=status.HTTP_400_BAD_REQUEST)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            "user": UserSerializer(user).data,
+            "token": token.key
+        },status=status.HTTP_200_OK)

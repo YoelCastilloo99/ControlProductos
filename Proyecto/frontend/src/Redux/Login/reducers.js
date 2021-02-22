@@ -21,6 +21,7 @@ const loginReducer = (state = initialState, action) => {
                 user: action.payload
             }
         case Types.AUTH_ERROR:
+        case Types.LOGOUT:
             localStorage.removeItem('token')
             return {
                 ...state,
